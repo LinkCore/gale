@@ -15,30 +15,93 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _cityTextController = TextEditingController();
+  double height = 0;
   String country = '';
   String cityName = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: const Color(0xFFf2f4f7),
-            elevation: 0,
-            centerTitle: true,
-            title: Row(mainAxisSize: MainAxisSize.min, children: [
-              Text('$country, ',
-                  style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold)),
-              Text(cityName,
-                  style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w400))
-            ])),
-        body: BlocConsumer<WeatherBloc, WeatherState>(
-            listener: (context, state) {
+      backgroundColor: const Color(0xFFf2f4f7),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 40),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('$country, ',
+                        style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold)),
+                    Text(cityName,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w400)),
+                    Container(
+                      margin: const EdgeInsets.only(left: 2.5),
+                      child: InkWell(
+                        child: const Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: Colors.black87,
+                        ),
+                        onTap: () {
+                          setState(() {
+                            if (height == 45) {
+                              height = 0;
+                            } else {
+                              height = 45;
+                            }
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                AnimatedContainer(
+                  margin: const EdgeInsets.only(top: 10, right: 15, left: 15),
+                  height: height,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15)),
+                  duration: const Duration(seconds: 1),
+                  child: TextFormField(
+                    controller: _cityTextController,
+                    decoration: InputDecoration(
+                      hintText: "Search for Location",
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 12.5),
+                      border: InputBorder.none,
+                      suffixIcon: InkWell(
+                        child: const Icon(
+                          Icons.search,
+                          color: Colors.black87,
+                        ),
+                        onTap: () {
+                          if (_cityTextController.text.isNotEmpty) {
+                            context.read<WeatherBloc>().add(WeatherCityEvent(
+                                city: _cityTextController.text));
+                            _cityTextController.clear();
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: height == 45 ?
+              MediaQuery.of(context).size.height - (kToolbarHeight + height * 5)
+            : MediaQuery.of(context).size.height -120,
+            child: BlocConsumer<WeatherBloc, WeatherState>(
+                listener: (context, state) {
               if (state is WeatherHasDataState) {
                 setState(() {
                   country = state.weather.sys!.country.toString();
@@ -46,18 +109,28 @@ class _HomePageState extends State<HomePage> {
                 });
               }
             }, builder: (context, state) {
-          if (state is WeatherLoadingState) {
-            return const WeatherLoadingWidget();
-          } else if (state is WeatherHasDataState) {
-            return WeatherHasDataWidget(
-              state: state,
-              cityTextController: _cityTextController,
-            );
-          } else if (state is WeatherErrorState) {
-            return WeatherErrorWidget(state: state, cityTextController: _cityTextController);
-          } else {
-            return const WeatherInitialWidget();
-          }
-        }));
+              if (state is WeatherLoadingState) {
+                return const WeatherLoadingWidget();
+              } else if (state is WeatherHasDataState) {
+                return WeatherHasDataWidget(
+                  state: state,
+                );
+              } else if (state is WeatherErrorState) {
+                return WeatherErrorWidget(
+                    state: state, cityTextController: _cityTextController);
+              } else {
+                return const WeatherInitialWidget();
+              }
+            }),
+          ),
+        ],
+      ),
+      floatingActionButton: InkWell(
+        child: const Icon(Icons.location_searching),
+        onTap: () {
+          context.read<WeatherBloc>().add(WeatherStartupEvent());
+        },
+      ),
+    );
   }
 }
