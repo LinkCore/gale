@@ -5,6 +5,8 @@ class WeatherLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+        color: const Color(0xFFf2f4f7),
+        child: const Center(child: CircularProgressIndicator()));
   }
 }

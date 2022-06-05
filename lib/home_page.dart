@@ -4,7 +4,7 @@ import 'package:gale/scenes/weather_bloc/weather_bloc.dart';
 import 'package:gale/scenes/widgets/weather_error_widget.dart';
 import 'package:gale/scenes/widgets/weather_has_data_widget.dart';
 import 'package:gale/scenes/widgets/weather_initial_widget.dart';
-import 'package:gale/scenes/widgets/weathre_loading_widget.dart';
+import 'package:gale/scenes/widgets/weather_loading_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _cityTextController = TextEditingController();
   String country = '';
   String cityName = '';
 
@@ -48,9 +49,12 @@ class _HomePageState extends State<HomePage> {
           if (state is WeatherLoadingState) {
             return const WeatherLoadingWidget();
           } else if (state is WeatherHasDataState) {
-            return const WeatherHasDataWidget();
+            return WeatherHasDataWidget(
+              state: state,
+              cityTextController: _cityTextController,
+            );
           } else if (state is WeatherErrorState) {
-            return const WeatherErrorWidget();
+            return WeatherErrorWidget(state: state, cityTextController: _cityTextController);
           } else {
             return const WeatherInitialWidget();
           }
