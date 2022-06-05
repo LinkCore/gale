@@ -29,5 +29,11 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   Future<void> _onWeatherCityEvent(
       WeatherCityEvent event, Emitter<WeatherState> emit) async {
     emit(WeatherLoadingState());
+    try {
+      final WeatherNow weatherByCity = await WeatherService().getWeatherByCity(event.city);
+      emit(WeatherHasDataState(weather: weatherByCity));
+    } on Exception catch (e){
+      emit(WeatherErrorState(errorCode: e.toString()));
+    }
   }
 }
