@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gale/scenes/weather_bloc/weather_bloc.dart';
+import 'package:gale/scenes/weather_forecast_bloc/weather_forecast_bloc.dart';
 
 import 'home_page.dart';
 
@@ -9,8 +10,13 @@ class GaleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => WeatherBloc()..add(WeatherStartupEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => WeatherBloc()..add(WeatherStartupEvent())),
+        BlocProvider(
+            create: (context) => WeatherForecastBloc()..add(WeatherForecastStartupEvent())),
+      ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: HomePage(),

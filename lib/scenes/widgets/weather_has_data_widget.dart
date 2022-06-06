@@ -1,14 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gale/scenes/widgets/weather_loading_widget.dart';
 
 import '../weather_bloc/weather_bloc.dart';
+import '../weather_forecast_bloc/weather_forecast_bloc.dart';
 
 class WeatherHasDataWidget extends StatelessWidget {
   final WeatherHasDataState state;
 
-  const WeatherHasDataWidget(
-      {Key? key, required this.state})
-      : super(key: key);
+  const WeatherHasDataWidget({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +99,20 @@ class WeatherHasDataWidget extends StatelessWidget {
                               fontWeight: FontWeight.w800))
                     ])
                   ])),
+          BlocBuilder<WeatherForecastBloc, WeatherForecastState>(
+              builder: (context, state) {
+            if (state is WeatherForecastLoadingState) {
+              return const WeatherLoadingWidget();
+            } else if (state is WeatherForecastHasDataState) {
+              return Column(
+                children: [Text(state.weatherForecast.city!.name.toString())],
+              );
+            } else if (state is WeatherForecastErrorState) {
+              return Text(state.errorCode);
+            } else {
+              return const Text("Error");
+            }
+          })
         ]));
   }
 }

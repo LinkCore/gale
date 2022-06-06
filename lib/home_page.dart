@@ -22,14 +22,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFf2f4f7),
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            margin: const EdgeInsets.only(top: 40),
-            child: Column(
-              children: [
+              margin: const EdgeInsets.only(top: 40),
+              child: Column(children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         child: const Icon(
                           Icons.keyboard_arrow_down_sharp,
-                          color: Colors.black87,
+                          color: Colors.black87
                         ),
                         onTap: () {
                           setState(() {
@@ -58,48 +58,49 @@ class _HomePageState extends State<HomePage> {
                               height = 45;
                             }
                           });
-                        },
-                      ),
-                    ),
-                  ],
+                        }
+                      )
+                    )
+                  ]
                 ),
                 AnimatedContainer(
-                  margin: const EdgeInsets.only(top: 10, right: 15, left: 15),
-                  height: height,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15)),
-                  duration: const Duration(seconds: 1),
-                  child: TextFormField(
-                    controller: _cityTextController,
-                    decoration: InputDecoration(
-                      hintText: "Search for Location",
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 12.5),
-                      border: InputBorder.none,
-                      suffixIcon: InkWell(
-                        child: const Icon(
-                          Icons.search,
-                          color: Colors.black87,
-                        ),
-                        onTap: () {
-                          if (_cityTextController.text.isNotEmpty) {
-                            context.read<WeatherBloc>().add(WeatherCityEvent(
+                  curve: Curves.easeInQuad,
+                    margin: const EdgeInsets.only(top: 10, right: 15, left: 15),
+                    height: height,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15)),
+                    duration: const Duration(milliseconds: 325),
+                    child: TextFormField(
+                      onEditingComplete: (){if (_cityTextController.text.isNotEmpty) {
+                        context.read<WeatherBloc>().add(
+                            WeatherCityEvent(
                                 city: _cityTextController.text));
-                            _cityTextController.clear();
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+                        _cityTextController.clear();
+                      }},
+                        controller: _cityTextController,
+                        decoration: InputDecoration(
+                            hintText: "Search for Location",
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 12.5),
+                            border: InputBorder.none,
+                            suffixIcon: InkWell(
+                                child: const Icon(Icons.search,
+                                    color: Colors.black87),
+                                onTap: () {
+                                  if (_cityTextController.text.isNotEmpty) {
+                                    context.read<WeatherBloc>().add(
+                                        WeatherCityEvent(
+                                            city: _cityTextController.text));
+                                    _cityTextController.clear();
+                                  }
+                                }))))
+              ])),
           SizedBox(
-            height: height == 45 ?
-              MediaQuery.of(context).size.height - (kToolbarHeight + height * 5)
-            : MediaQuery.of(context).size.height -120,
+            height: height == 45
+                ? MediaQuery.of(context).size.height -
+                    (kToolbarHeight + height * 5)
+                : MediaQuery.of(context).size.height - 120,
             child: BlocConsumer<WeatherBloc, WeatherState>(
                 listener: (context, state) {
               if (state is WeatherHasDataState) {
@@ -121,16 +122,16 @@ class _HomePageState extends State<HomePage> {
               } else {
                 return const WeatherInitialWidget();
               }
-            }),
-          ),
-        ],
+            })
+          )
+        ]
       ),
       floatingActionButton: InkWell(
         child: const Icon(Icons.location_searching),
         onTap: () {
           context.read<WeatherBloc>().add(WeatherStartupEvent());
-        },
-      ),
+        }
+      )
     );
   }
 }
