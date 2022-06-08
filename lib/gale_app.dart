@@ -17,9 +17,10 @@ class GaleApp extends StatelessWidget {
         BlocProvider(
             create: (context) => WeatherForecastBloc()..add(WeatherForecastStartupEvent())),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        theme: ThemeData(scaffoldBackgroundColor: Colors.black87),
+        home: const HomePage(),
       ),
     );
   }
