@@ -5,9 +5,10 @@ import '../models/weather_forecast.dart';
 class WeatherForecastService {
   Future<WeatherForecast> getWeatherForecast(String lat, String lon) async {
     final response = await get(Uri.parse(
-      //'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={API key}'
       'https://api.openweathermap.org/data/2.5/forecast?&lat=$lat&lon=$lon&appid=92aae42e0334d07dd97322a4cc4a058e&units=metric'));
     final weatherForecast = WeatherForecast.fromJson(jsonDecode(response.body));
+    print(response.body);
+    print(weatherForecast);
     return weatherForecast;
   }
 

@@ -96,34 +96,28 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 }))))
               ])),
-          SizedBox(
-            height: height == 45
-                ? MediaQuery.of(context).size.height -
-                    (kToolbarHeight + height * 5)
-                : MediaQuery.of(context).size.height - 120,
-            child: BlocConsumer<WeatherBloc, WeatherState>(
-                listener: (context, state) {
-              if (state is WeatherHasDataState) {
-                setState(() {
-                  country = state.weather.sys!.country.toString();
-                  cityName = state.weather.name.toString();
-                });
-              }
-            }, builder: (context, state) {
-              if (state is WeatherLoadingState) {
-                return const WeatherLoadingWidget();
-              } else if (state is WeatherHasDataState) {
-                return WeatherHasDataWidget(
-                  state: state,
-                );
-              } else if (state is WeatherErrorState) {
-                return WeatherErrorWidget(
-                    state: state, cityTextController: _cityTextController);
-              } else {
-                return const WeatherInitialWidget();
-              }
-            })
-          )
+          BlocConsumer<WeatherBloc, WeatherState>(
+              listener: (context, state) {
+            if (state is WeatherHasDataState) {
+              setState(() {
+                country = state.weather.sys!.country.toString();
+                cityName = state.weather.name.toString();
+              });
+            }
+          }, builder: (context, state) {
+            if (state is WeatherLoadingState) {
+              return const WeatherLoadingWidget();
+            } else if (state is WeatherHasDataState) {
+              return WeatherHasDataWidget(
+                state: state,
+              );
+            } else if (state is WeatherErrorState) {
+              return WeatherErrorWidget(
+                  state: state, cityTextController: _cityTextController);
+            } else {
+              return const WeatherInitialWidget();
+            }
+          })
         ]
       ),
       floatingActionButton: InkWell(

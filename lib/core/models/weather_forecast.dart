@@ -30,9 +30,9 @@ class WeatherForecast {
     _cod = json['cod'];
     _message = json['message'];
     _cnt = json['cnt'];
-    if (json['forecast'] != null) {
+    if (json['list'] != null) {
       _forecast = [];
-      json['forecast'].forEach((v) {
+      json['list'].forEach((v) {
         _forecast?.add(Forecast.fromJson(v));
       });
     }
@@ -44,6 +44,14 @@ class WeatherForecast {
   int? _cnt;
   List<Forecast>? _forecast;
   City? _city;
+
+  String get iconUrl {
+    return 'https://openweathermap.org/img/wn/${forecast!.map((e) => e.weather!.map((q) => q.icon))}@2x.png';
+  }
+
+  String get forecastIconUrl {
+    return 'https://openweathermap.org/img/wn/${forecast!.map((e) => e.weather!.first).toList()}@2x.png';
+  }
 
   String? get cod => _cod;
 
@@ -61,7 +69,7 @@ class WeatherForecast {
     map['message'] = _message;
     map['cnt'] = _cnt;
     if (_forecast != null) {
-      map['forecast'] = _forecast?.map((v) => v.toJson()).toList();
+      map['list'] = _forecast?.map((v) => v.toJson()).toList();
     }
     if (_city != null) {
       map['city'] = _city?.toJson();
@@ -195,7 +203,7 @@ class Forecast {
     Clouds? clouds,
     Wind? wind,
     int? visibility,
-    double? pop,
+    int? pop,
     Sys? sys,
     String? dtTxt,
   }) {
@@ -238,7 +246,7 @@ class Forecast {
   Clouds? _clouds;
   Wind? _wind;
   int? _visibility;
-  double? _pop;
+  int? _pop;
   Sys? _sys;
   String? _dtTxt;
 
@@ -254,7 +262,7 @@ class Forecast {
 
   int? get visibility => _visibility;
 
-  double? get pop => _pop;
+  int? get pop => _pop;
 
   Sys? get sys => _sys;
 
@@ -337,7 +345,7 @@ class Wind {
   }
 
   Wind.fromJson(dynamic json) {
-    _speed = json['speed'];
+    _speed = double.parse(json['speed'].toString());
     _deg = json['deg'];
     _gust = json['gust'];
   }
@@ -458,7 +466,7 @@ class Main {
     int? seaLevel,
     int? grndLevel,
     int? humidity,
-    int? tempKf,
+    double? tempKf,
   }) {
     _temp = temp;
     _feelsLike = feelsLike;
@@ -477,15 +485,15 @@ class Main {
   }
 
   Main.fromJson(dynamic json) {
-    _temp = json['temp'];
+    _temp = double.parse(json['temp'].toString());
     _feelsLike = json['feels_like'];
-    _tempMin = json['temp_min'];
-    _tempMax = json['temp_max'];
+    _tempMin = double.parse(json['temp_min'].toString());
+    _tempMax = double.parse(json['temp_max'].toString());
     _pressure = json['pressure'];
     _seaLevel = json['sea_level'];
     _grndLevel = json['grnd_level'];
     _humidity = json['humidity'];
-    _tempKf = json['temp_kf'];
+    _tempKf = double.parse(json['temp_kf'].toString());
   }
 
   double? _temp;
@@ -496,7 +504,7 @@ class Main {
   int? _seaLevel;
   int? _grndLevel;
   int? _humidity;
-  int? _tempKf;
+  double? _tempKf;
 
   double? get temp => _temp;
 
@@ -514,7 +522,7 @@ class Main {
 
   int? get humidity => _humidity;
 
-  int? get tempKf => _tempKf;
+  //double? get tempKf => _tempKf;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
