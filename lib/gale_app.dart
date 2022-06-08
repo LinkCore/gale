@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gale/scenes/theme/theme_bloc/theme_bloc.dart';
 import 'package:gale/scenes/weather_bloc/weather_bloc.dart';
 import 'package:gale/scenes/weather_forecast_bloc/weather_forecast_bloc.dart';
 
@@ -13,15 +14,28 @@ class GaleApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+            create: (context) => ThemeBloc()..add(ThemeStartupEvent())),
+        BlocProvider(
             create: (context) => WeatherBloc()..add(WeatherStartupEvent())),
         BlocProvider(
-            create: (context) => WeatherForecastBloc()..add(WeatherForecastStartupEvent())),
+            create: (context) =>
+                WeatherForecastBloc()..add(WeatherForecastStartupEvent())),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: Colors.black87),
-        home: const HomePage(),
-      ),
+      child: BlocListener<ThemeBloc, ThemeState>(
+          listener: (context, state) {
+            if (state is ThemeHasDataState) {
+              MaterialApp(
+                theme: state.currentTheme,
+                debugShowCheckedModeBanner: false,
+                home: const HomePage(),
+              );
+            }
+          },
+          child: MaterialApp(
+            theme: ThemeData.light(),
+            debugShowCheckedModeBanner: false,
+            home: const HomePage(),
+          )),
     );
   }
 }
