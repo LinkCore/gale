@@ -32,7 +32,7 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
               padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10, top: 5),
               decoration: BoxDecoration(
-                  color: AppColors.showerRainColor,
+                  color: AppColors.cartColor,
                   borderRadius: BorderRadius.circular(20)),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -133,10 +133,9 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
                                 Container(
                                   margin: const EdgeInsets.all(4),
                                   padding: const EdgeInsets.symmetric(vertical: 10),
-                                  decoration: BoxDecoration(color: AppColors.lightRainColor,
+                                  decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20)
                                   ),
-
                                   child: Column(
                                   children: [
                                     Text(DateFormat('kk:mm').format(DateTime.parse(e.dtTxt!)), style: GoogleFonts.poppins(color: AppColors.whiteTextColor, fontWeight: FontWeight.w700),),
