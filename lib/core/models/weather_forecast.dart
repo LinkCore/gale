@@ -347,7 +347,7 @@ class Wind {
   Wind.fromJson(dynamic json) {
     _speed = double.parse(json['speed'].toString());
     _deg = json['deg'];
-    _gust = json['gust'];
+    _gust = double.parse(json['gust'].toString());
   }
 
   double? _speed;
@@ -486,7 +486,7 @@ class Main {
 
   Main.fromJson(dynamic json) {
     _temp = double.parse(json['temp'].toString());
-    _feelsLike = json['feels_like'];
+    _feelsLike = double.parse(json['feels_like'].toString());
     _tempMin = double.parse(json['temp_min'].toString());
     _tempMax = double.parse(json['temp_max'].toString());
     _pressure = json['pressure'];

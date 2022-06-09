@@ -40,6 +40,7 @@ dependencies:
   cached_network_image: ^3.2.0
   flutter_fortune_wheel: ^1.2.0
   intl: ^0.17.0
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

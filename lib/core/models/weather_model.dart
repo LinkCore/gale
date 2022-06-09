@@ -203,7 +203,7 @@ class Wind {
   }
 
   Wind.fromJson(dynamic json) {
-    _speed = json['speed'];
+    _speed = double.parse(json['speed'].toString());
     _deg = json['deg'];
   }
 

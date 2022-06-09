@@ -1,9 +1,11 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gale/scenes/widgets/weather_loading_widget.dart';
 
+import '../../common/app_colors.dart';
 import '../weather_bloc/weather_bloc.dart';
 import '../weather_forecast_bloc/weather_forecast_bloc.dart';
 
@@ -20,17 +22,17 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         width: MediaQuery.of(context).size.width,
-        color: const Color(0xFFf2f4f7),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
+        child: Column(
+            children: [
           Container(
+              height: MediaQuery.of(context).size.height/4.5,
               width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.only(
-                  left: 15, right: 15, top: 15, bottom: 15),
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10, top: 5),
               decoration: BoxDecoration(
-                  color: const Color(0xFF5674ff),
+                  color: AppColors.showerRainColor,
                   borderRadius: BorderRadius.circular(20)),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -39,74 +41,80 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CachedNetworkImage(
-                              imageUrl: widget.state.weather.iconUrl),
-                          Text(
-                              widget.state.weather.weather!.first.description
-                                  .toString(),
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w400))
+                          CachedNetworkImage(imageUrl: widget.state.weather.iconUrl,width: 115,height: 115),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text(widget.state.weather.weather!.first.description.toString(),
+                                style: GoogleFonts.poppins(
+                                    color: AppColors.whiteTextColor,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w400)),
+                          ),
                         ]),
                     const Spacer(),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('${widget.state.weather.main!.temp.toString()}°',
-                              style: const TextStyle(
-                                  color: Colors.white,
+                              style: GoogleFonts.poppins(
+                                  color: AppColors.whiteTextColor,
                                   fontSize: 80,
-                                  fontWeight: FontWeight.w900)),
+                                  fontWeight: FontWeight.w600)),
                           Text(
                               'Feels like  ${widget.state.weather.main!.feelsLike.toString()}°',
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15))
+                              style: GoogleFonts.poppins(
+                                  color: AppColors.whiteTextColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16))
                         ])
                   ])),
           Container(
+              height: MediaQuery.of(context).size.height/7,
               margin: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
-              padding: const EdgeInsets.symmetric(vertical: 25),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20), color: Colors.white),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Column(children: [
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                       Text('Wind',
-                          style: TextStyle(
-                              color: Colors.grey[400],
+                          style: GoogleFonts.poppins(
+                              color: AppColors.lightGreyTextColor,
                               fontWeight: FontWeight.w800)),
                       const SizedBox(height: 10),
                       Text('${widget.state.weather.wind!.speed.toString()} m/s',
-                          style: const TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w800))
+                          style: GoogleFonts.poppins(
+                              color: AppColors.greyTextColor,
+                              fontWeight: FontWeight.w700))
                     ]),
-                    Column(children: [
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                       Text('Humidity',
-                          style: TextStyle(
-                              color: Colors.grey[400],
+                          style: GoogleFonts.poppins(
+                              color: AppColors.lightGreyTextColor,
                               fontWeight: FontWeight.w800)),
                       const SizedBox(height: 10),
                       Text(
                           '${widget.state.weather.main!.humidity.toString()} %',
-                          style: const TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w800))
+                          style: GoogleFonts.poppins(
+                              color: AppColors.greyTextColor,
+                              fontWeight: FontWeight.w700))
                     ]),
-                    Column(children: [
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                       Text('Visibility',
-                          style: TextStyle(
-                              color: Colors.grey[400],
+                          style: GoogleFonts.poppins(
+                              color: AppColors.lightGreyTextColor,
                               fontWeight: FontWeight.w800)),
                       const SizedBox(height: 10),
-                      Text('${widget.state.weather.visibility.toString()} m',
-                          style: const TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w800))
+                      Text('${(widget.state.weather.visibility!/1000).toDouble().toString()} km',
+                          style: GoogleFonts.poppins(
+                              color: AppColors.greyTextColor,
+                              fontWeight: FontWeight.w700))
                     ])
                   ])),
           BlocBuilder<WeatherForecastBloc, WeatherForecastState>(
@@ -117,23 +125,26 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     children: state.weatherForecast.forecast!
                         .map((e) => Column(
                               children: [
-                                // Container(
-                                //   child: Column(children: [
-                                //     Text(DateFormat('kk:mm').format(DateTime.parse(e.dtTxt!))),
-                                //     Text('${e.main!.temp!.toInt().toString()}°'),
-                                //     CachedNetworkImage(imageUrl: e.weather!.first.toString()),
-                                //     Text('${e.wind!.speed.toString()}'' m/s'),
-                                //   ],),
-                                // ),
-                                Container(margin: const EdgeInsets.symmetric(horizontal: 5),child: Text( DateFormat('kk:mm').format(DateTime.parse(e.dtTxt!)))),
-                                Container(margin: const EdgeInsets.symmetric(horizontal: 5),child: Text('${e.main!.temp!.toInt().toString()}°')),
-                                Container(margin: const EdgeInsets.symmetric(horizontal: 5),child: Row(children: e.weather!.map((q) => CachedNetworkImage(imageUrl: 'https://openweathermap.org/img/wn/${q.icon.toString()}@2x.png') ).toList())),
-                                Container(margin: const EdgeInsets.symmetric(horizontal: 5),child: Text('${e.wind!.speed.toString()}'' m/s'))
+                                Container(
+                                  margin: const EdgeInsets.all(4),
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  decoration: BoxDecoration(color: AppColors.lightRainColor,
+                                  borderRadius: BorderRadius.circular(20)
+                                  ),
+
+                                  child: Column(
+                                  children: [
+                                    Text(DateFormat('kk:mm').format(DateTime.parse(e.dtTxt!)), style: GoogleFonts.poppins(color: AppColors.whiteTextColor, fontWeight: FontWeight.w700),),
+                                    Text('${e.main!.temp!.toInt().toString()}°', style: GoogleFonts.poppins(color: AppColors.whiteTextColor, fontWeight: FontWeight.w600, fontSize: 26),),
+                                    Row(children: e.weather!.map((q) => CachedNetworkImage(imageUrl: 'https://openweathermap.org/img/wn/${q.icon.toString()}@2x.png') ).toList()),
+                                    Text('${e.wind!.speed.toString()}'' m/s',style: GoogleFonts.poppins(color: AppColors.whiteTextColor, fontWeight: FontWeight.w500),),
+                                  ],),
+                                ),
                               ],
                             ))
                         .toList(),
