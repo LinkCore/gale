@@ -7,8 +7,6 @@ class WeatherForecastService {
     final response = await get(Uri.parse(
       'https://api.openweathermap.org/data/2.5/forecast?&lat=$lat&lon=$lon&appid=92aae42e0334d07dd97322a4cc4a058e&units=metric'));
     final weatherForecast = WeatherForecast.fromJson(jsonDecode(response.body));
-    print(response.body);
-    print(weatherForecast);
     return weatherForecast;
   }
 

@@ -6,8 +6,15 @@ import 'package:gale/scenes/weather_forecast_bloc/weather_forecast_bloc.dart';
 
 import 'home_page.dart';
 
-class GaleApp extends StatelessWidget {
+class GaleApp extends StatefulWidget {
   const GaleApp({Key? key}) : super(key: key);
+
+  @override
+  State<GaleApp> createState() => _GaleAppState();
+}
+
+class _GaleAppState extends State<GaleApp> {
+  ThemeData themeColor = ThemeData.light();
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +31,14 @@ class GaleApp extends StatelessWidget {
       child: BlocListener<ThemeBloc, ThemeState>(
           listener: (context, state) {
             if (state is ThemeHasDataState) {
-              MaterialApp(
-                theme: state.currentTheme,
-                debugShowCheckedModeBanner: false,
-                home: const HomePage(),
-              );
+              setState(() {
+                themeColor = state.currentTheme;
+              });
+
             }
           },
           child: MaterialApp(
-            theme: ThemeData.light(),
+            theme: themeColor,
             debugShowCheckedModeBanner: false,
             home: const HomePage(),
           )),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'app_colors.dart';
 
 class AppTheme{
@@ -20,6 +19,9 @@ class AppTheme{
   );
   static ThemeData rainTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.rainColor,
+  );
+  static ThemeData lightRainTheme = ThemeData(
+    scaffoldBackgroundColor: AppColors.lightRainColor,
   );
   static ThemeData thunderstormTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.thunderstormColor,

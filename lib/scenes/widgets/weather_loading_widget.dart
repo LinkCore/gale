@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:gale/common/app_colors.dart';
 
 class WeatherLoadingWidget extends StatelessWidget {
   const WeatherLoadingWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: const Color(0xFFf2f4f7),
-        child: const Center(child: CircularProgressIndicator()));
+    return SizedBox(
+      height: MediaQuery.of(context).size.height / 2.5,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: const [
+        CircularProgressIndicator(color: AppColors.showerRainColor)
+      ])
+    );
   }
 }
