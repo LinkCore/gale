@@ -235,7 +235,7 @@ class Forecast {
     _clouds = json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null;
     _wind = json['wind'] != null ? Wind.fromJson(json['wind']) : null;
     _visibility = json['visibility'];
-    _pop = json['pop'];
+    _pop = double.parse(json['pop'].toString()).toInt();
     _sys = json['sys'] != null ? Sys.fromJson(json['sys']) : null;
     _dtTxt = json['dt_txt'];
   }
