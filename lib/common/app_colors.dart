@@ -17,8 +17,8 @@ class AppColors{
   static const Color snowColor = Color(0xFFC0CFD6);
 
   static const Color showerRainColor = Color(0xFFa3b6ff);
-  static const Color lightRainColor = Color(0xFFB9D6BC);
-  static const Color rainColor = Color(0xFFa3b6ff);
+  static const Color lightRainColor = Color(0xFF99caff);
+  static const Color rainColor = Color(0xFF7e96de);
 
   static const Color thunderstormColor = Color(0xFF556672);
 

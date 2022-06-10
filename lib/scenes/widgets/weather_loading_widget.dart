@@ -12,7 +12,7 @@ class WeatherLoadingWidget extends StatelessWidget {
       child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: const [
-        CircularProgressIndicator(color: AppColors.showerRainColor)
+        CircularProgressIndicator(color: AppColors.cartColor)
       ])
     );
   }

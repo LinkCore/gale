@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gale/common/app_theme.dart';
 import 'package:gale/scenes/theme/theme_bloc/theme_bloc.dart';
 import 'package:gale/scenes/weather_bloc/weather_bloc.dart';
 import 'package:gale/scenes/weather_forecast_bloc/weather_forecast_bloc.dart';
@@ -14,7 +15,7 @@ class GaleApp extends StatefulWidget {
 }
 
 class _GaleAppState extends State<GaleApp> {
-  ThemeData themeColor = ThemeData.light();
+  ThemeData themeColor = AppTheme.clearSkyTheme;
 
   @override
   Widget build(BuildContext context) {

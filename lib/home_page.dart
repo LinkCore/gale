@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gale/common/app_colors.dart';
 import 'package:gale/scenes/theme/theme_bloc/theme_bloc.dart';
 import 'package:gale/scenes/weather_bloc/weather_bloc.dart';
+import 'package:gale/scenes/weather_forecast_bloc/weather_forecast_bloc.dart';
 import 'package:gale/scenes/widgets/weather_error_widget.dart';
 import 'package:gale/scenes/widgets/weather_has_data_widget.dart';
 import 'package:gale/scenes/widgets/weather_initial_widget.dart';
@@ -84,10 +85,9 @@ class _HomePageState extends State<HomePage> {
                     child: TextFormField(
                         onEditingComplete: () {
                           if (_cityTextController.text.isNotEmpty) {
-                            context.read<WeatherBloc>().add(WeatherCityEvent(
-                                city: _cityTextController.text));
-                            context.read<ThemeBloc>().add(
-                                ThemeCityEvent(city: _cityTextController.text));
+                            context.read<ThemeBloc>().add(ThemeCityEvent(city: _cityTextController.text));
+                            context.read<WeatherBloc>().add(WeatherCityEvent(city: _cityTextController.text));
+                            context.read<WeatherForecastBloc>().add(WeatherForecastCityEvent(city: _cityTextController.text));
                             _cityTextController.clear();
                             FocusManager.instance.primaryFocus?.unfocus();
                           } else {
@@ -110,15 +110,16 @@ class _HomePageState extends State<HomePage> {
                                       color: AppColors.greyTextColor),
                                   onTap: () {
                                     if (_cityTextController.text.isNotEmpty) {
-                                      context.read<WeatherBloc>().add(
-                                          WeatherCityEvent(
-                                              city: _cityTextController.text));
+                                      context.read<ThemeBloc>().add(ThemeCityEvent(city: _cityTextController.text));
+                                      context.read<WeatherBloc>().add(WeatherCityEvent(city: _cityTextController.text));
+                                      context.read<WeatherForecastBloc>().add(WeatherForecastCityEvent(city: _cityTextController.text));
                                       _cityTextController.clear();
                                     }
                                   }),
                             ))))
               ])),
-          BlocConsumer<WeatherBloc, WeatherState>(listener: (context, state) {
+          BlocConsumer<WeatherBloc, WeatherState>(
+              listener: (context, state) {
             if (state is WeatherHasDataState) {
               setState(() {
                 country = state.weather.sys!.country.toString();
@@ -147,6 +148,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 context.read<WeatherBloc>().add(WeatherStartupEvent());
                 context.read<ThemeBloc>().add(ThemeStartupEvent());
+                context.read<WeatherForecastBloc>().add(WeatherForecastStartupEvent());
               }),
         ));
   }

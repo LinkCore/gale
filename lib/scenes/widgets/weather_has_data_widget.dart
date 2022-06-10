@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gale/scenes/widgets/weather_loading_widget.dart';
 
 import '../../common/app_colors.dart';
 import '../weather_bloc/weather_bloc.dart';
@@ -120,7 +119,7 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
           BlocBuilder<WeatherForecastBloc, WeatherForecastState>(
               builder: (context, state) {
             if (state is WeatherForecastLoadingState) {
-              return const WeatherLoadingWidget();
+              return const CircularProgressIndicator(color: AppColors.cartColor);
             } else if (state is WeatherForecastHasDataState) {
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
