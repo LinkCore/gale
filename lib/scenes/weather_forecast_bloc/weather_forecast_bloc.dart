@@ -21,16 +21,17 @@ class WeatherForecastBloc extends Bloc<WeatherForecastEvent, WeatherForecastStat
       WeatherForecastStartupEvent event, Emitter<WeatherForecastState> emit) async {
     emit(WeatherForecastLoadingState());
     Position geoLocation = await GeolocationProvider().determinePosition();
-    final WeatherForecast weatherForecast = await WeatherForecastService()
-        .getWeatherForecast(geoLocation.latitude.toString(), geoLocation.longitude.toString());
+    final WeatherForecast weatherForecast = await WeatherForecastService().getWeatherForecast(geoLocation.latitude.toString(), geoLocation.longitude.toString());
     emit(WeatherForecastHasDataState(weatherForecast: weatherForecast));
   }
 
   Future<void> _onWeatherForecastCityEvent(
       WeatherForecastCityEvent event, Emitter<WeatherForecastState> emit) async {
     emit(WeatherForecastLoadingState());
+    ///cool
     try {
-      final WeatherForecast weatherForecastByCity = await WeatherForecastService().getWeatherByCityForecast(event.city);
+      final WeatherForecast weatherForecastByCity = await WeatherForecastService().getWeatherForecastByCity(event.city);
+
       emit(WeatherForecastHasDataState(weatherForecast: weatherForecastByCity));
     } on Exception catch (e){
       emit(WeatherForecastErrorState(errorCode: e.toString()));
