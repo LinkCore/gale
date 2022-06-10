@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'app_colors.dart';
 
-class AppTheme{
+class AppTheme {
   static ThemeData clearSkyTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.clearSkyColor,
   );
@@ -23,6 +24,9 @@ class AppTheme{
   static ThemeData lightRainTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.lightRainColor,
   );
+  static ThemeData moderateRainTheme = ThemeData(
+      scaffoldBackgroundColor: AppColors.moderateRainColor
+  );
   static ThemeData thunderstormTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.thunderstormColor,
   );
@@ -31,5 +35,8 @@ class AppTheme{
   );
   static ThemeData mistTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.mistColor,
+  );
+  static ThemeData hazeTheme = ThemeData(
+    scaffoldBackgroundColor: AppColors.hazeColor,
   );
 }

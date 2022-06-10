@@ -365,8 +365,8 @@ class Coord {
   }
 
   Coord.fromJson(dynamic json) {
-    _lon = json['lon'];
-    _lat = json['lat'];
+    _lon = double.parse(json['lon'].toString()).toDouble();
+    _lat = double.parse(json['lat'].toString()).toDouble();
   }
 
   double? _lon;

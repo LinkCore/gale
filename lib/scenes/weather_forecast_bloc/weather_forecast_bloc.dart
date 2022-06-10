@@ -28,7 +28,6 @@ class WeatherForecastBloc extends Bloc<WeatherForecastEvent, WeatherForecastStat
   Future<void> _onWeatherForecastCityEvent(
       WeatherForecastCityEvent event, Emitter<WeatherForecastState> emit) async {
     emit(WeatherForecastLoadingState());
-    ///cool
     try {
       final WeatherForecast weatherForecastByCity = await WeatherForecastService().getWeatherForecastByCity(event.city);
 
