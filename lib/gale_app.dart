@@ -35,14 +35,13 @@ class _GaleAppState extends State<GaleApp> {
               setState(() {
                 themeColor = state.currentTheme;
               });
-
             }
           },
           child: MaterialApp(
             theme: themeColor,
             debugShowCheckedModeBanner: false,
-            home: const HomePage(),
-          )),
+            home: HomePage(themeColor: themeColor)
+          ))
     );
   }
 }
