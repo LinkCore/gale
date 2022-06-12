@@ -11,28 +11,32 @@ import '../../core/service/weather_forecast_service.dart';
 part 'weather_forecast_event.dart';
 part 'weather_forecast_state.dart';
 
-class WeatherForecastBloc extends Bloc<WeatherForecastEvent, WeatherForecastState> {
+class WeatherForecastBloc
+    extends Bloc<WeatherForecastEvent, WeatherForecastState> {
   WeatherForecastBloc() : super(WeatherForecastInitial()) {
     on<WeatherForecastStartupEvent>(_onWeatherForecastStartupEvent);
     on<WeatherForecastCityEvent>(_onWeatherForecastCityEvent);
   }
 
-  Future<void> _onWeatherForecastStartupEvent(
-      WeatherForecastStartupEvent event, Emitter<WeatherForecastState> emit) async {
+  Future<void> _onWeatherForecastStartupEvent(WeatherForecastStartupEvent event,
+      Emitter<WeatherForecastState> emit) async {
     emit(WeatherForecastLoadingState());
     Position geoLocation = await GeolocationProvider().determinePosition();
-    final WeatherForecast weatherForecast = await WeatherForecastService().getWeatherForecast(geoLocation.latitude.toString(), geoLocation.longitude.toString());
+    final WeatherForecast weatherForecast = await WeatherForecastService()
+        .getWeatherForecast(
+            geoLocation.latitude.toString(), geoLocation.longitude.toString());
     emit(WeatherForecastHasDataState(weatherForecast: weatherForecast));
   }
 
-  Future<void> _onWeatherForecastCityEvent(
-      WeatherForecastCityEvent event, Emitter<WeatherForecastState> emit) async {
+  Future<void> _onWeatherForecastCityEvent(WeatherForecastCityEvent event,
+      Emitter<WeatherForecastState> emit) async {
     emit(WeatherForecastLoadingState());
     try {
-      final WeatherForecast weatherForecastByCity = await WeatherForecastService().getWeatherForecastByCity(event.city);
+      final WeatherForecast weatherForecastByCity =
+          await WeatherForecastService().getWeatherForecastByCity(event.city);
 
       emit(WeatherForecastHasDataState(weatherForecast: weatherForecastByCity));
-    } on Exception catch (e){
+    } on Exception catch (e) {
       emit(WeatherForecastErrorState(errorCode: e.toString()));
     }
   }

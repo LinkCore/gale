@@ -21,8 +21,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       WeatherStartupEvent event, Emitter<WeatherState> emit) async {
     emit(WeatherLoadingState());
     Position geoLocation = await GeolocationProvider().determinePosition();
-    final WeatherNow weather = await WeatherService()
-        .getWeatherNow(geoLocation.latitude.toString(), geoLocation.longitude.toString());
+    final WeatherNow weather = await WeatherService().getWeatherNow(
+        geoLocation.latitude.toString(), geoLocation.longitude.toString());
     emit(WeatherHasDataState(weather: weather));
   }
 
@@ -30,9 +30,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       WeatherCityEvent event, Emitter<WeatherState> emit) async {
     emit(WeatherLoadingState());
     try {
-      final WeatherNow weatherByCity = await WeatherService().getWeatherByCity(event.city);
+      final WeatherNow weatherByCity =
+          await WeatherService().getWeatherByCity(event.city);
       emit(WeatherHasDataState(weather: weatherByCity));
-    } on Exception catch (e){
+    } on Exception catch (e) {
       emit(WeatherErrorState(errorCode: e.toString()));
     }
   }

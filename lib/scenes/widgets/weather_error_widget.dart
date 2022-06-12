@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import 'package:gale/common/app_text_styles.dart';
+import '../../common/app_text.dart';
 import '../weather_bloc/weather_bloc.dart';
 
 class WeatherErrorWidget extends StatelessWidget {
@@ -15,10 +15,8 @@ class WeatherErrorWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
         Text(
-          'Error ${state.errorCode}',
-          style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400),
-        ),
-      ]),
-    );
+          '${AppText.error} ${state.errorCode}',
+          style: AppTextStyles.errorTextStyle
+        )]));
   }
 }

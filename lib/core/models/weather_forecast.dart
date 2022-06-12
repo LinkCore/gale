@@ -12,8 +12,7 @@ class WeatherForecast {
     int? message,
     int? cnt,
     List<Forecast>? forecast,
-    City? city,
-  }) {
+    City? city}) {
     _cod = cod;
     _message = message;
     _cnt = cnt;
@@ -54,13 +53,9 @@ class WeatherForecast {
   }
 
   String? get cod => _cod;
-
   int? get message => _message;
-
   int? get cnt => _cnt;
-
   List<Forecast>? get forecast => _forecast;
-
   City? get city => _city;
 
   Map<String, dynamic> toJson() {
@@ -90,8 +85,7 @@ class City {
     String? country,
     int? timezone,
     int? sunrise,
-    int? sunset,
-  }) {
+    int? sunset}) {
     _id = id;
     _name = name;
     _coord = coord;
@@ -125,17 +119,11 @@ class City {
   int? _sunset;
 
   int? get id => _id;
-
   String? get name => _name;
-
   Coord? get coord => _coord;
-
   String? get country => _country;
-
   int? get timezone => _timezone;
-
   int? get sunrise => _sunrise;
-
   int? get sunset => _sunset;
 
   Map<String, dynamic> toJson() {
@@ -180,7 +168,6 @@ class Coord {
   double? _lon;
 
   double? get lat => _lat;
-
   double? get lon => _lon;
 
   Map<String, dynamic> toJson() {
@@ -205,8 +192,7 @@ class Forecast {
     int? visibility,
     int? pop,
     Sys? sys,
-    String? dtTxt,
-  }) {
+    String? dtTxt}) {
     _dt = dt;
     _main = main;
     _weather = weather;
@@ -251,21 +237,13 @@ class Forecast {
   String? _dtTxt;
 
   int? get dt => _dt;
-
   Main? get main => _main;
-
   List<Weather>? get weather => _weather;
-
   Clouds? get clouds => _clouds;
-
   Wind? get wind => _wind;
-
   int? get visibility => _visibility;
-
   int? get pop => _pop;
-
   Sys? get sys => _sys;
-
   String? get dtTxt => _dtTxt;
 
   Map<String, dynamic> toJson() {
@@ -314,7 +292,6 @@ class Sys {
   }
 
   String? _pod;
-
   String? get pod => _pod;
 
   Map<String, dynamic> toJson() {
@@ -332,8 +309,7 @@ class Wind {
   Wind({
     double? speed,
     int? deg,
-    double? gust,
-  }) {
+    double? gust}) {
     _speed = speed;
     _deg = deg;
     _gust = gust;
@@ -355,9 +331,7 @@ class Wind {
   double? _gust;
 
   double? get speed => _speed;
-
   int? get deg => _deg;
-
   double? get gust => _gust;
 
   Map<String, dynamic> toJson() {
@@ -409,8 +383,7 @@ class Weather {
     int? id,
     String? main,
     String? description,
-    String? icon,
-  }) {
+    String? icon}) {
     _id = id;
     _main = main;
     _description = description;
@@ -435,11 +408,8 @@ class Weather {
   String? _icon;
 
   int? get id => _id;
-
   String? get main => _main;
-
   String? get description => _description;
-
   String? get icon => _icon;
 
   Map<String, dynamic> toJson() {
@@ -466,8 +436,7 @@ class Main {
     int? seaLevel,
     int? grndLevel,
     int? humidity,
-    double? tempKf,
-  }) {
+    double? tempKf}) {
     _temp = temp;
     _feelsLike = feelsLike;
     _tempMin = tempMin;
@@ -507,22 +476,14 @@ class Main {
   double? _tempKf;
 
   double? get temp => _temp;
-
   double? get feelsLike => _feelsLike;
-
   double? get tempMin => _tempMin;
-
   double? get tempMax => _tempMax;
-
   int? get pressure => _pressure;
-
   int? get seaLevel => _seaLevel;
-
   int? get grndLevel => _grndLevel;
-
   int? get humidity => _humidity;
-
-  //double? get tempKf => _tempKf;
+  double? get tempKf => _tempKf;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
