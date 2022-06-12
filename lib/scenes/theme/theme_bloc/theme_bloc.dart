@@ -11,7 +11,6 @@ import '../../../core/service/geolocation_service.dart';
 import '../../../core/service/weather_service.dart';
 
 part 'theme_event.dart';
-
 part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
