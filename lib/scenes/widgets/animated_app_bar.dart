@@ -15,7 +15,7 @@ class AnimatedAppBar extends StatefulWidget {
   final String cityName;
   final ThemeData themeColor;
 
-  AnimatedAppBar(
+  const AnimatedAppBar(
       {Key? key,
       required this.country,
       required this.cityName,
