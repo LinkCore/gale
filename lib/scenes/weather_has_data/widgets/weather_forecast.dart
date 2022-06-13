@@ -18,9 +18,12 @@ class WeatherForecastWidget extends StatefulWidget {
 class _WeatherForecastWidgetState extends State<WeatherForecastWidget> {
   String newDay = "24:00";
 
-  String forecastTitle(){
-    if(DateFormat(AppText.kkMm).format(DateTime.parse(widget.e.dtTxt!)).toString() == newDay){
-      if(widget.e.dtTxt!.contains(newDay[0])){
+  String forecastTitle() {
+    if (DateFormat(AppText.kkMm)
+            .format(DateTime.parse(widget.e.dtTxt!))
+            .toString() ==
+        newDay) {
+      if (widget.e.dtTxt!.contains(newDay[0])) {
         return DateFormat(AppText.e).format(DateTime.parse(widget.e.dtTxt!));
       } else {
         return DateFormat(AppText.ddMM).format(DateTime.parse(widget.e.dtTxt!));
@@ -42,10 +45,15 @@ class _WeatherForecastWidgetState extends State<WeatherForecastWidget> {
                 style: AppTextStyles.forecastCartTitleTextStyle),
             Text('${widget.e.main!.temp!.toInt().toString()}°',
                 style: AppTextStyles.forecastCartSubtitleTextStyle),
-            Row(children: widget.e.weather!.map((q) => CachedNetworkImage(
-             imageUrl: '${AppText.imgLink}${q.icon.toString()}${AppText.imgPngLink}')).toList()),
+            Row(
+                children: widget.e.weather!
+                    .map((q) => CachedNetworkImage(
+                        imageUrl:
+                            '${AppText.imgLink}${q.icon.toString()}${AppText.imgPngLink}'))
+                    .toList()),
             Text('${widget.e.wind!.speed.toString()}' ' ${AppText.mS}',
-                style: AppTextStyles.forecastCartEndTitleTextStyle
-            )]))]);
+                style: AppTextStyles.forecastCartEndTitleTextStyle)
+          ]))
+    ]);
   }
 }

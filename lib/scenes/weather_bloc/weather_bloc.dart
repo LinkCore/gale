@@ -25,7 +25,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       final WeatherNow weather = await WeatherService().getWeatherNow(
           geoLocation.latitude.toString(), geoLocation.longitude.toString());
       emit(WeatherHasDataState(weather: weather));
-    } on Exception catch (e){
+    } on Exception catch (e) {
       emit(WeatherErrorState(errorCode: e.toString()));
     }
   }

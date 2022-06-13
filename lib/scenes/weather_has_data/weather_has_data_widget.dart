@@ -31,9 +31,15 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
       context.read<WeatherForecastBloc>().add(WeatherForecastStartupEvent());
       FocusManager.instance.primaryFocus?.unfocus();
     } else {
-      context.read<WeatherBloc>().add(WeatherCityEvent(city: widget.cityTextController));
-      context.read<WeatherForecastBloc>().add(WeatherForecastCityEvent(city: widget.cityTextController));
-      context.read<ThemeBloc>().add(ThemeCityEvent(city: widget.cityTextController));
+      context
+          .read<WeatherBloc>()
+          .add(WeatherCityEvent(city: widget.cityTextController));
+      context
+          .read<WeatherForecastBloc>()
+          .add(WeatherForecastCityEvent(city: widget.cityTextController));
+      context
+          .read<ThemeBloc>()
+          .add(ThemeCityEvent(city: widget.cityTextController));
     }
   }
 
@@ -59,12 +65,15 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
                       child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 15),
                           child: Row(
-                              children: state.weatherForecast.forecast!.map((e) =>
-                                  WeatherForecastWidget(e: e)).toList())));
+                              children: state.weatherForecast.forecast!
+                                  .map((e) => WeatherForecastWidget(e: e))
+                                  .toList())));
                 } else if (state is WeatherForecastErrorState) {
                   return Text(state.errorCode);
                 } else {
                   return Text(AppText.error);
-                }})])));
+                }
+              })
+            ])));
   }
 }
