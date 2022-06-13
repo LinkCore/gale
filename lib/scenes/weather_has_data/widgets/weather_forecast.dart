@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gale/common/app_text_styles.dart';
 import 'package:intl/intl.dart';
 
+import '../../../common/app_colors.dart';
 import '../../../common/app_text.dart';
 import '../../../core/models/weather_forecast.dart';
 
@@ -37,9 +38,17 @@ class _WeatherForecastWidgetState extends State<WeatherForecastWidget> {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-          margin: const EdgeInsets.all(4),
+          margin: const EdgeInsets.only(left: 5,right:5,bottom: 10, top: 5),
           padding: const EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+              color: Theme.of(context).scaffoldBackgroundColor,
+              boxShadow: [
+                BoxShadow(
+                    color: AppColors.blackTextColor.withOpacity(0.3),
+                    offset: const Offset(-2, 2),
+                    blurRadius: 5)
+              ]
+          ),
           child: Column(children: [
             Text(forecastTitle(),
                 style: AppTextStyles.forecastCartTitleTextStyle),
