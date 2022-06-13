@@ -6,13 +6,11 @@ class WeatherLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 2.5,
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-        CircularProgressIndicator(
-            color: Theme.of(context).textTheme.bodyText1!.color
-        )]));
+        height: MediaQuery.of(context).size.height / 2.5,
+        width: MediaQuery.of(context).size.width,
+        child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+          CircularProgressIndicator(
+              color: Theme.of(context).textTheme.bodyText1!.color)
+        ]));
   }
 }

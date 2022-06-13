@@ -22,7 +22,8 @@ class _WeatherCartDescriptionState extends State<WeatherCartDescription> {
         height: MediaQuery.of(context).size.height / 7,
         margin: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: AppColors.whiteTextColor),
+            borderRadius: BorderRadius.circular(20),
+            color: AppColors.whiteTextColor),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           WeatherCartDescriptionSection(
               textSubtitle: AppText.mS,
@@ -35,7 +36,7 @@ class _WeatherCartDescriptionState extends State<WeatherCartDescription> {
           WeatherCartDescriptionSection(
               textSubtitle: AppText.km,
               textTitle: AppText.visibility,
-              state: widget.state
-          )]));
+              state: widget.state)
+        ]));
   }
 }

@@ -39,15 +39,16 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       ThemeCityEvent event, Emitter<ThemeState> emit) async {
     emit(ThemeLoadingState());
     try {
-      final WeatherNow weatherByCity = await WeatherService().getWeatherByCity(event.city);
+      final WeatherNow weatherByCity =
+          await WeatherService().getWeatherByCity(event.city);
       String description = weatherByCity.weather!.first.description.toString();
 
-      if(AppUtilities.mapStringToTheme.containsKey(description)){
+      if (AppUtilities.mapStringToTheme.containsKey(description)) {
         emit(AppUtilities.mapStringToTheme[description]!);
-      } else{
+      } else {
         emit(ThemeErrorState(errorCode: e.toString()));
       }
-    } on Exception catch (e){
+    } on Exception catch (e) {
       emit(ThemeErrorState(errorCode: e.toString()));
     }
   }

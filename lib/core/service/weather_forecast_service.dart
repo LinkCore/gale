@@ -9,10 +9,11 @@ class WeatherForecastService {
   final String units = AppText.units;
 
   Future<WeatherForecast> getWeatherForecast(String lat, String lon) async {
-    final response = await get(Uri.parse(
-        '$link&lat=$lat&lon=$lon&appid=$key&$units'));
+    final response =
+        await get(Uri.parse('$link&lat=$lat&lon=$lon&appid=$key&$units'));
     if (response.statusCode == 200) {
-      final weatherForecast = WeatherForecast.fromJson(jsonDecode(response.body));
+      final weatherForecast =
+          WeatherForecast.fromJson(jsonDecode(response.body));
       return weatherForecast;
     } else {
       return throw Exception(response.statusCode);
@@ -20,10 +21,10 @@ class WeatherForecastService {
   }
 
   Future<WeatherForecast> getWeatherForecastByCity(String city) async {
-    final response = await get(Uri.parse(
-        '${link}q=$city&appid=$key&$units'));
+    final response = await get(Uri.parse('${link}q=$city&appid=$key&$units'));
     if (response.statusCode == 200) {
-      final weatherForecast = WeatherForecast.fromJson(jsonDecode(response.body));
+      final weatherForecast =
+          WeatherForecast.fromJson(jsonDecode(response.body));
       return weatherForecast;
     } else {
       return throw Exception(response.statusCode);

@@ -20,12 +20,13 @@ class _GaleAppState extends State<GaleApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) =>
-            ThemeBloc()..add(ThemeStartupEvent())),
-          BlocProvider(create: (context) =>
-            WeatherBloc()..add(WeatherStartupEvent())),
-          BlocProvider(create: (context) =>
-            WeatherForecastBloc()..add(WeatherForecastStartupEvent()))
+          BlocProvider(
+              create: (context) => ThemeBloc()..add(ThemeStartupEvent())),
+          BlocProvider(
+              create: (context) => WeatherBloc()..add(WeatherStartupEvent())),
+          BlocProvider(
+              create: (context) =>
+                  WeatherForecastBloc()..add(WeatherForecastStartupEvent()))
         ],
         child: BlocListener<ThemeBloc, ThemeState>(
             listener: (context, state) {
@@ -33,7 +34,8 @@ class _GaleAppState extends State<GaleApp> {
                 setState(() {
                   themeColor = state.currentTheme;
                 });
-              }},
+              }
+            },
             child: MaterialApp(
                 theme: themeColor,
                 debugShowCheckedModeBanner: false,

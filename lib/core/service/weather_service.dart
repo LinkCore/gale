@@ -9,16 +9,14 @@ class WeatherService {
   final String units = AppText.units;
 
   Future<WeatherNow> getWeatherNow(String lat, String lon) async {
-    final response = await get(Uri.parse(
-        '${link}lat=$lat&lon=$lon&appid=$key&$units'));
+    final response =
+        await get(Uri.parse('${link}lat=$lat&lon=$lon&appid=$key&$units'));
     final weather = WeatherNow.fromJson(jsonDecode(response.body));
     return weather;
   }
 
   Future<WeatherNow> getWeatherByCity(String city) async {
-
-    final response = await get(Uri.parse(
-        '${link}q=$city&appid=$key&$units'));
+    final response = await get(Uri.parse('${link}q=$city&appid=$key&$units'));
     if (response.statusCode == 200) {
       final weather = WeatherNow.fromJson(jsonDecode(response.body));
       return weather;

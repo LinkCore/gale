@@ -62,18 +62,24 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
         margin: const EdgeInsets.only(top: 15),
         child: Column(children: [
           InkWell(
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(changeTextCountry,
-                  style: Theme.of(context).textTheme.bodyText1!.merge(AppTextStyles.appBarCountryTextStyle)),
-              Text(widget.cityName,
-                  style: Theme.of(context).textTheme.bodyText1!.merge(AppTextStyles.appBarCityNameTextStyle)),
-              Container(
-                  margin: const EdgeInsets.only(left: 0),
-                  child: Icon(Icons.keyboard_arrow_down_sharp,
-                      color: Theme.of(context).textTheme.bodyText1!.color))
-            ]),
-            onTap: animatedHeight,
-          ),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(changeTextCountry,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .merge(AppTextStyles.appBarCountryTextStyle)),
+                Text(widget.cityName,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .merge(AppTextStyles.appBarCityNameTextStyle)),
+                Container(
+                    margin: const EdgeInsets.only(left: 0),
+                    child: Icon(Icons.keyboard_arrow_down_sharp,
+                        color: Theme.of(context).textTheme.bodyText1!.color))
+              ]),
+              onTap: animatedHeight),
           AnimatedContainer(
               curve: Curves.easeInQuad,
               margin: const EdgeInsets.only(top: 10, right: 15, left: 15),
@@ -112,8 +118,6 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                     },
                     controller: widget.cityTextController,
                     decoration: InputDecoration(
-                        // hintText: changeHintText,
-                        // hintStyle: GoogleFonts.poppins(),
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 11.5),
                         border: InputBorder.none,
@@ -147,25 +151,31 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                                   }
                                 })))),
                 Positioned(
-                  child: GestureDetector(
-                    onTap: (){searchNode.requestFocus();},
-                    child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: AnimatedOpacity(
-                        duration: const Duration(milliseconds: 425),
-                        curve: Curves.easeInQuad,
-                        opacity: opacity,
-                        child: Container(
-                            padding: const EdgeInsets.only(left: 10),
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 40),
-                            child: Visibility(
-                                visible: isHintTextVisible,
-                                child: Text(AppText.searchForLocationTextField,
-                                    style: Theme.of(context).textTheme.bodyText1!.merge(AppTextStyles.hintTextStyle))))),
-                  ),
-                  ),
-                )
+                    child: GestureDetector(
+                        onTap: () {
+                          searchNode.requestFocus();
+                        },
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: AnimatedOpacity(
+                                duration: const Duration(milliseconds: 425),
+                                curve: Curves.easeInQuad,
+                                opacity: opacity,
+                                child: Container(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    margin: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width /
+                                                40),
+                                    child: Visibility(
+                                        visible: isHintTextVisible,
+                                        child: Text(
+                                            AppText.searchForLocationTextField,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .merge(AppTextStyles
+                                                    .hintTextStyle))))))))
               ]))
         ]));
   }
