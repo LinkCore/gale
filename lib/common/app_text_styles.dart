@@ -14,4 +14,5 @@ class AppTextStyles{
   static TextStyle forecastCartSubtitleTextStyle = GoogleFonts.poppins(fontSize: 26, fontWeight: FontWeight.w600, color: AppColors.whiteTextColor);
   static TextStyle forecastCartEndTitleTextStyle = GoogleFonts.poppins(fontWeight: FontWeight.w500, color: AppColors.whiteTextColor);
   static TextStyle errorTextStyle = GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400);
+  static TextStyle hintTextStyle = GoogleFonts.poppins(color: AppColors.blackTextColor);
 }

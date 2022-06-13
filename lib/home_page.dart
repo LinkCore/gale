@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
     context.read<WeatherBloc>().add(WeatherStartupEvent());
     context.read<ThemeBloc>().add(ThemeStartupEvent());
     context.read<WeatherForecastBloc>().add(WeatherForecastStartupEvent());
-    _cityTextController.clear();
   }
 
   @override
@@ -53,8 +52,8 @@ class _HomePageState extends State<HomePage> {
             if (state is WeatherLoadingState) {
               return const WeatherLoadingWidget();
             } else if (state is WeatherHasDataState) {
-              return WeatherHasDataWidget(
-                  state: state, cityTextController: _cityTextController.text);
+              return
+                WeatherHasDataWidget(state: state, cityTextController: _cityTextController.text);
             } else if (state is WeatherErrorState) {
               return WeatherErrorWidget(state: state);
             } else {

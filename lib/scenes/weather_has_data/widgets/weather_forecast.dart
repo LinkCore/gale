@@ -16,6 +16,20 @@ class WeatherForecastWidget extends StatefulWidget {
 }
 
 class _WeatherForecastWidgetState extends State<WeatherForecastWidget> {
+  String newDay = "24:00";
+
+  String forecastTitle(){
+    if(DateFormat(AppText.kkMm).format(DateTime.parse(widget.e.dtTxt!)).toString() == newDay){
+      if(widget.e.dtTxt!.contains(newDay[0])){
+        return DateFormat(AppText.e).format(DateTime.parse(widget.e.dtTxt!));
+      } else {
+        return DateFormat(AppText.ddMM).format(DateTime.parse(widget.e.dtTxt!));
+      }
+    } else {
+      return DateFormat(AppText.kkMm).format(DateTime.parse(widget.e.dtTxt!));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -24,8 +38,7 @@ class _WeatherForecastWidgetState extends State<WeatherForecastWidget> {
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
           child: Column(children: [
-            Text(
-                DateFormat(AppText.kkMm).format(DateTime.parse(widget.e.dtTxt!)),
+            Text(forecastTitle(),
                 style: AppTextStyles.forecastCartTitleTextStyle),
             Text('${widget.e.main!.temp!.toInt().toString()}°',
                 style: AppTextStyles.forecastCartSubtitleTextStyle),

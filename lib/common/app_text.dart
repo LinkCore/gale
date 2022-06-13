@@ -22,4 +22,7 @@ class AppText {
   static String km = 'km';
   static String error = 'Error';
   static String kkMm = 'kk:mm';
+  static String kk = 'kk';
+  static String ddMM = 'dd.MM';
+  static String e = 'E';
 }

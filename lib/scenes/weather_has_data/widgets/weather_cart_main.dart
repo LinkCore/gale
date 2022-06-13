@@ -23,8 +23,12 @@ class _WeatherCartMainState extends State<WeatherCartMain> {
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
         padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10, top: 5),
         decoration: BoxDecoration(
-            color: AppColors.cartColor,
-            borderRadius: BorderRadius.circular(20)),
+          color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(color: AppColors.blackTextColor.withOpacity(0.3), offset: const Offset(-3,3), blurRadius: 5),
+            ],
+        ),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,14 +37,16 @@ class _WeatherCartMainState extends State<WeatherCartMain> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CachedNetworkImage(imageUrl: widget.state.weather.iconUrl,width: 115,height: 115),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                        height: MediaQuery.of(context).size.height/18,
-                        margin: const EdgeInsets.only(left: 5),
+                    Container(
+                      height: MediaQuery.of(context).size.height/18,
+                      width: MediaQuery.of(context).size.width/2.5,
+                      margin: const EdgeInsets.only(left: 5),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
                         child: Text(widget.state.weather.weather!.first.description.toString(),
-                            style: AppTextStyles.weatherCartMainDescriptionTextStyle
-                        )))]),
+                            style: AppTextStyles.weatherCartMainDescriptionTextStyle,
+                        ),
+                      ))]),
               const Spacer(),
               Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

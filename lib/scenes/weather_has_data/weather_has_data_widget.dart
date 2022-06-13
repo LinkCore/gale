@@ -44,7 +44,7 @@ class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
         width: MediaQuery.of(context).size.width,
         child: RefreshIndicator(
             onRefresh: _onRefresh,
-            color: AppColors.cartColor,
+            color: Theme.of(context).scaffoldBackgroundColor,
             backgroundColor: AppColors.whiteTextColor,
             child: ListView(children: [
               WeatherCartMain(state: widget.state),
