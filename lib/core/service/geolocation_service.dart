@@ -15,7 +15,7 @@ class GeolocationProvider {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error(AppText.locationPermissionsAreDenied);
+        return throw Exception();
       }
     }
 

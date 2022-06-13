@@ -6,8 +6,6 @@ class AppColors{
   static Color? lightGreyTextColor = Colors.grey[400];
   static Color? greyTextColor = Colors.grey[800];
 
-  static const Color cartColor = Color(0xff5627ff0);
-
   static const Color clearSkyColor = Color(0xFFffb787);
   static const Color fewCloudsColor = Color(0xFFffb496);
 
