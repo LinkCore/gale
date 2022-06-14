@@ -10,6 +10,8 @@ class AppColors {
   static const Color fewCloudsColor = Color(0xFFffb496);
 
   static const Color scatteredCloudsColor = Color(0xFFc8bcb1);
+  static const Color overcastCloudsColor = Color(0xFFc8bcb1);
+
   static const Color brokenCloudsColor = Color(0xFF9ba2bd);
 
   static const Color snowColor = Color(0xFFC0CFD6);

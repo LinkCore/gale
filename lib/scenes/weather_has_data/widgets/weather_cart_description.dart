@@ -19,8 +19,8 @@ class _WeatherCartDescriptionState extends State<WeatherCartDescription> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height / 7,
-        margin: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
+        height: MediaQuery.of(context).size.height / 8,
+        margin: const EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: AppColors.whiteTextColor),

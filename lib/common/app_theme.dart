@@ -13,6 +13,9 @@ class AppTheme {
   static ThemeData scatteredCloudsTheme = ThemeData(
       scaffoldBackgroundColor: AppColors.scatteredCloudsColor,
       textTheme: TextTheme(bodyText1: AppTextStyles.appBarCityNameTextStyle));
+  static ThemeData overcastCloudsTheme = ThemeData(
+    scaffoldBackgroundColor: AppColors.overcastCloudsColor,
+    textTheme: TextTheme(bodyText1: AppTextStyles.appBarCityNameTextStyle));
   static ThemeData brokenCloudsTheme = ThemeData(
       scaffoldBackgroundColor: AppColors.brokenCloudsColor,
       textTheme: TextTheme(

@@ -26,9 +26,10 @@ class _HomePageState extends State<HomePage> {
   String cityName = '';
 
   Future<void> _onGeolocationWeather() async {
-    context.read<WeatherBloc>().add(WeatherStartupEvent());
     context.read<ThemeBloc>().add(ThemeStartupEvent());
+    context.read<WeatherBloc>().add(WeatherStartupEvent());
     context.read<WeatherForecastBloc>().add(WeatherForecastStartupEvent());
+    _cityTextController.clear();
   }
 
   @override

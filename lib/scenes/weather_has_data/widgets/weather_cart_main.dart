@@ -30,7 +30,7 @@ class _WeatherCartMainState extends State<WeatherCartMain> {
               BoxShadow(
                   color: AppColors.blackTextColor.withOpacity(0.3),
                   offset: const Offset(-2, 2),
-                  blurRadius: 5)
+                  blurRadius: 2)
             ]),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.start,

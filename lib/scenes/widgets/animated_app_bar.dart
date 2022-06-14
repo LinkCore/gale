@@ -62,20 +62,12 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
         margin: const EdgeInsets.only(top: 15),
         child: Column(children: [
           InkWell(
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(changeTextCountry,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
+              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(changeTextCountry, style: Theme.of(context).textTheme.bodyText1!
                         .merge(AppTextStyles.appBarCountryTextStyle)),
-                Text(widget.cityName,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
+                Text(widget.cityName, style: Theme.of(context).textTheme.bodyText1!
                         .merge(AppTextStyles.appBarCityNameTextStyle)),
-                Container(
-                    margin: const EdgeInsets.only(left: 0),
+                Container(margin: const EdgeInsets.only(left: 0),
                     child: Icon(Icons.keyboard_arrow_down_sharp,
                         color: Theme.of(context).textTheme.bodyText1!.color))
               ]),
@@ -133,16 +125,13 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                                       .cityTextController.text.isNotEmpty) {
                                     context.read<ThemeBloc>().add(
                                         ThemeCityEvent(
-                                            city: widget
-                                                .cityTextController.text));
+                                            city: widget.cityTextController.text));
                                     context.read<WeatherBloc>().add(
                                         WeatherCityEvent(
-                                            city: widget
-                                                .cityTextController.text));
+                                            city: widget.cityTextController.text));
                                     context.read<WeatherForecastBloc>().add(
                                         WeatherForecastCityEvent(
-                                            city: widget
-                                                .cityTextController.text));
+                                            city: widget.cityTextController.text));
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus();
                                   } else {
@@ -171,11 +160,8 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                                         visible: isHintTextVisible,
                                         child: Text(
                                             AppText.searchForLocationTextField,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .merge(AppTextStyles
-                                                    .hintTextStyle))))))))
+                                            style: Theme.of(context).textTheme.bodyText1!
+                                                .merge(AppTextStyles.hintTextStyle))))))))
               ]))
         ]));
   }
