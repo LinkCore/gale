@@ -24,22 +24,17 @@ class WeatherHasDataWidget extends StatefulWidget {
 
 class _WeatherHasDataWidgetState extends State<WeatherHasDataWidget> {
   Future<void> _onRefresh() async {
+
     await Future.delayed(const Duration(milliseconds: 425));
     if (widget.cityTextController.isEmpty) {
-      context.read<WeatherBloc>().add(WeatherStartupEvent());
       context.read<ThemeBloc>().add(ThemeStartupEvent());
+      context.read<WeatherBloc>().add(WeatherStartupEvent());
       context.read<WeatherForecastBloc>().add(WeatherForecastStartupEvent());
       FocusManager.instance.primaryFocus?.unfocus();
     } else {
-      context
-          .read<WeatherBloc>()
-          .add(WeatherCityEvent(city: widget.cityTextController));
-      context
-          .read<WeatherForecastBloc>()
-          .add(WeatherForecastCityEvent(city: widget.cityTextController));
-      context
-          .read<ThemeBloc>()
-          .add(ThemeCityEvent(city: widget.cityTextController));
+      context.read<ThemeBloc>().add(ThemeCityEvent(city: widget.cityTextController));
+      context.read<WeatherBloc>().add(WeatherCityEvent(city: widget.cityTextController));
+      context.read<WeatherForecastBloc>().add(WeatherForecastCityEvent(city: widget.cityTextController));
     }
   }
 
