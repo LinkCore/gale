@@ -1,4 +1,6 @@
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gale/common/app_colors.dart';
 import 'package:gale/common/app_text_styles.dart';
@@ -25,6 +27,11 @@ class _HomePageState extends State<HomePage> {
   String country = '';
   String cityName = '';
 
+  Future<ui.Image> loadImage() async {
+    final imageBytes = await rootBundle.load('assets/images/example.jpg');
+    return decodeImageFromList(imageBytes.buffer.asUint8List());
+  }
+
   Future<void> _onGeolocationWeather() async {
     context.read<ThemeBloc>().add(ThemeStartupEvent());
     context.read<WeatherBloc>().add(WeatherStartupEvent());
@@ -34,40 +41,61 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: ListView(children: [
-          AnimatedAppBar(
-              cityTextController: _cityTextController,
-              themeColor: widget.themeColor,
-              cityName: cityName,
-              country: country),
-          BlocConsumer<WeatherBloc, WeatherState>(listener: (context, state) {
-            if (state is WeatherHasDataState) {
-              setState(() {
-                country = state.weather.sys!.country.toString();
-                cityName = state.weather.name.toString();
-              });
-            }
-          }, builder: (context, state) {
-            if (state is WeatherLoadingState) {
-              return const WeatherLoadingWidget();
-            } else if (state is WeatherHasDataState) {
-              return WeatherHasDataWidget(
-                  state: state, cityTextController: _cityTextController.text);
-            } else if (state is WeatherErrorState) {
-              return WeatherErrorWidget(state: state);
-            } else {
-              return Text(AppText.errorState,
-                  style: AppTextStyles.appBarCityNameTextStyle);
-            }
-          })
-        ]),
-        floatingActionButton: Padding(
-            padding: const EdgeInsets.only(bottom: 30, right: 5),
-            child: InkWell(
-                child: const Icon(Icons.location_searching,
-                    size: 32, color: AppColors.blackTextColor),
-                onTap: _onGeolocationWeather)));
+    return FutureBuilder<ui.Image>(
+        future: loadImage(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.none) {
+            return Scaffold(
+                resizeToAvoidBottomInset: false,
+                body: Center(
+                    child: CircularProgressIndicator(
+                        color: Theme.of(context).textTheme.bodyText1!.color)));
+          } else {
+            final image = snapshot.data;
+            return ShaderMask(
+                shaderCallback: (Rect bounds) => ImageShader(
+                    image!,
+                    TileMode.mirror,
+                    TileMode.mirror,
+                    Matrix4.identity().storage),
+                child: Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    body: ListView(children: [
+                      AnimatedAppBar(
+                          cityTextController: _cityTextController,
+                          themeColor: widget.themeColor,
+                          cityName: cityName,
+                          country: country),
+                      BlocConsumer<WeatherBloc, WeatherState>(
+                          listener: (context, state) {
+                        if (state is WeatherHasDataState) {
+                          setState(() {
+                            country = state.weather.sys!.country.toString();
+                            cityName = state.weather.name.toString();
+                          });
+                        }
+                      }, builder: (context, state) {
+                        if (state is WeatherLoadingState) {
+                          return const WeatherLoadingWidget();
+                        } else if (state is WeatherHasDataState) {
+                          return WeatherHasDataWidget(
+                              state: state,
+                              cityTextController: _cityTextController.text);
+                        } else if (state is WeatherErrorState) {
+                          return WeatherErrorWidget(state: state);
+                        } else {
+                          return Text(AppText.errorState,
+                              style: AppTextStyles.appBarCityNameTextStyle);
+                        }
+                      })
+                    ]),
+                    floatingActionButton: Padding(
+                        padding: const EdgeInsets.only(bottom: 30, right: 5),
+                        child: InkWell(
+                            child: const Icon(Icons.location_searching,
+                                size: 32, color: AppColors.blackTextColor),
+                            onTap: _onGeolocationWeather))));
+          }
+        });
   }
 }
