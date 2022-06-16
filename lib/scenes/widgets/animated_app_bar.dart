@@ -36,9 +36,11 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
     if (height == 45) {
       setState(() {
         opacity = 0;
+
       });
       await Future.delayed(const Duration(milliseconds: 425));
       setState(() {
+        widget.cityTextController.clear();
         height = 0;
         FocusManager.instance.primaryFocus?.unfocus();
       });
@@ -48,6 +50,7 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
       });
       await Future.delayed(const Duration(milliseconds: 425));
       setState(() {
+        isHintTextVisible = true;
         opacity = 1;
       });
     }

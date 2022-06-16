@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> {
     context.read<ThemeBloc>().add(ThemeStartupEvent());
     context.read<WeatherBloc>().add(WeatherStartupEvent());
     context.read<WeatherForecastBloc>().add(WeatherForecastStartupEvent());
-    _cityTextController.clear();
   }
 
   @override
@@ -51,16 +50,18 @@ class _HomePageState extends State<HomePage> {
                     child: CircularProgressIndicator(
                         color: Theme.of(context).textTheme.bodyText1!.color)));
           } else {
-            final image = snapshot.data;
+            final image = snapshot.data!;
             return ShaderMask(
                 shaderCallback: (Rect bounds) => ImageShader(
-                    image!,
+                    image,
                     TileMode.mirror,
                     TileMode.mirror,
                     Matrix4.identity().storage),
                 child: Scaffold(
                     resizeToAvoidBottomInset: false,
-                    body: ListView(children: [
+                    body: ListView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
                       AnimatedAppBar(
                           cityTextController: _cityTextController,
                           themeColor: widget.themeColor,
